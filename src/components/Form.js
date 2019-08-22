@@ -13,6 +13,11 @@ background: #115DA8;
 
 `;
 
+const TosLabel = styled.label`
+margin: 10px;
+`;
+
+
 const TextField = styled.div`
 margin: 10px;
 `;
@@ -23,7 +28,9 @@ background-color: #00a86b;
 width: 20%;
 margin: 15px;
 text-align: center;
-padding: 5px 5px 5px 0;
+padding: 0 0 5px 0;
+border-radius: 15px;
+
 `;
 
 const FormDiv = styled.div`
@@ -87,11 +94,11 @@ const MyForm = ({errors, touched, values, isSubmitting, status}) => {
                     {touched.password && errors.password && <p>{errors.password}</p>}
                 </TextField>
 
-                <label>
+                <TosLabel>
                     <Field type='checkbox' name='tos' checked={values.tos} />
                     {touched.tos && errors.tos && <p>{errors.tos}</p>}
-                    Accept TOS
-                </label>
+                    Accept TOS     
+                </TosLabel>
 
                     <button type='submit' disabled = {isSubmitting}>Submit</button>
                 
@@ -100,7 +107,8 @@ const MyForm = ({errors, touched, values, isSubmitting, status}) => {
             <Users>
                 {users.map(user => (
                 <UserList key={user.id}>
-                    <li>Name: {user.name}</li>
+                    
+                    <li>Name: {user.name}</li>                    
                     <li>Email: {user.email}</li>
                     <li>Favorite Matrix Film: {user.favMatrix}</li>
                     <li>Favorite Book: {user.book}</li>
@@ -117,6 +125,7 @@ const MyForm = ({errors, touched, values, isSubmitting, status}) => {
 
 const FormikMyForm = withFormik({mapPropsToValues({name, email, book, tl, animal, favMatrix, password, tos}){
     return {
+
         name: name || '',
         email: email || '',
         favMatrix: favMatrix || '',
